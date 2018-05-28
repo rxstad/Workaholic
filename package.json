@@ -1,12 +1,13 @@
 {
-  "name": "electron-quick-start",
+  "name": "Workaholic",
   "version": "1.0.0",
-  "description": "A minimal Electron application",
+  "description": "A simple electron app to organize your work schedule and salary.",
   "main": "main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "pack": "electron-packager . --icon \"app_icons/Icon.icns\" --overwrite"
   },
-  "repository": "https://github.com/electron/electron-quick-start",
+  "repository": "https://github.com/kongestad/Workaholic.git",
   "keywords": [
     "Electron",
     "quick",
@@ -14,13 +15,14 @@
     "tutorial",
     "demo"
   ],
-  "author": "GitHub",
+  "author": "Tomas Rekstad",
   "license": "CC0-1.0",
   "devDependencies": {
     "electron": "^2.0.0"
   },
   "dependencies": {
     "bootstrap": "^4.1.1",
-    "bootstrap-slider": "^10.0.2"
+    "bootstrap-slider": "^10.0.2",
+    "electron-packager": "^8.7.0"
   }
 }

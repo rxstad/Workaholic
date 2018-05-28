@@ -2,13 +2,19 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>Hello World!</title>
+    <title>Workaholic</title>
     <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="./node_modules/bootstrap-slider/dist/css/bootstrap-slider.min.css">
+    <link rel="stylesheet" href="css/style.css">
   </head>
   <body>
-
-    <input id="ex12c" type="text"/><br/>
+    <div class="main">
+        <input id="ex12c" type="text"/>
+        <div class="startTime">
+          <p></p>
+        </div>
+    </div>
+    
 
     <script>
       // You can also require other files to run in this process
@@ -19,15 +25,33 @@
       var sliderC = new Slider("#ex12c", { 
         id: "slider12c", 
         min: 0, 
-        max: 10, 
-        range: true, 
-        value: [3, 7] 
-      });
-      
-      sliderC.on("slide", function(sliderValue) {
-        //din kode
+        max: 24, 
+        range: true,
+        step: 0.5,
+        tooltip: 'always',
+        tooltip_split: true,
+        value: [8, 17]
       });
 
+     
+      
+      sliderC.on("slide", function(sliderValue) {
+      
+          // Calculate Income, runs when slider is slided.
+			 
+        var startTime		= sliderValue[0];
+        var endTime 	  = sliderValue[1];
+				var workHours  				= endTime - startTime;
+				var basicIncome     	= workHours * 100; // Change 100 to input value.
+				
+				// basicIncome += overtime; 
+        
+        document.querySelector(".startTime p").innerHTML = basicIncome;
+
+      });
+
+
+      
     </script>
   </body>
 </html>

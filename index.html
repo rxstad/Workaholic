@@ -1,96 +1,113 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <title>Workaholic</title>
-    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="./node_modules/bootstrap-slider/dist/css/bootstrap-slider.min.css">
-    <link rel="stylesheet" href="css/style.css">
-  </head>
-  <body>
-    <div class="main">
-      <div class="prebox_cont">
-        <div class="prebox3">
-            <input id="ex12c" type="text"/>
-        </div>
-        <div class="prebox1">
-            <div class="showStartTime">
-              Start
-              <h2>06</h2>
-            </div>
-        </div>
-        <div class="prebox2">
-            <div class="showEndTime">
-              Slutt
-              <h2>17</h2>
-            </div>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Workaholic</title>
+  <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="./node_modules/bootstrap-slider/dist/css/bootstrap-slider.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<div class="draggable"></div>
+
+<body style="-webkit-app-region: no-drag">
+  <div class="main">
+    <div class="prebox_cont">
+      <div class="preintrobox">
+        <p onclick='openBox()'>Neste</p>
+      </div>
+      <div class="prebox3">
+        <input id="ex12c" type="text" />
+      </div>
+      <div class="prebox1">
+        <div class="showStartTime">
+          Start
+          <h2>06</h2>
         </div>
       </div>
-      
-
+      <div class="prebox2">
+        <div class="showEndTime">
+          Slutt
+          <h2>17</h2>
+        </div>
+      </div>
     </div>
-    
+  </div>
 
-    <script>
-      // You can also require other files to run in this process
-      require('./renderer.js')
-      
-      var Slider = require("bootstrap-slider");
 
-      var sliderC = new Slider("#ex12c", { 
-        id: "slider12c", 
-        min: 0, 
-        max: 24, 
-        range: true,
-        step: 0.5,
-        tooltip: 'always',
-        tooltip_split: true,
-        value: [6, 17]
-      });
-      
-      sliderC.on("slide", function(sliderValue) {
-      
-        // Make it to minutes, multiply by 60! 5*60/10??
-        var decimalPart          = sliderValue[0] - Math.floor(sliderValue[0]);
-        var onlyTwoDecimalPlaces = decimalPart.toFixed(2);
-        var minutes              = onlyTwoDecimalPlaces * 600 / 10;
+  <script>
+    // You can also require other files to run in this process
+    require('./renderer.js')
 
-        console.log(minutes);
-          // Calculate Income, runs when slider is slided.
-			 
-        var startTime		  = sliderValue[0]; 
-        var endTime 	    = sliderValue[1];
-				var workHours  		= endTime - startTime;
-				var basicIncome   = workHours * 100; // Change 100 to input value.
-        
-        // basicIncome += overtime; Calculate overtime
-        if (sliderValue[0] <= 9.5) {
-          document.querySelector(".showStartTime h2").innerHTML = "0" + sliderValue[0];
-        } else {
-          document.querySelector(".showStartTime h2").innerHTML = sliderValue[0];
-        }
-        if (sliderValue[1] <= 9.5) {
-          document.querySelector(".showEndTime h2").innerHTML = "0" + sliderValue[1];
-        } else {
-          document.querySelector(".showEndTime h2").innerHTML = sliderValue[1];
-        }
+    var Slider = require("bootstrap-slider");
 
-      });
+    var sliderC = new Slider("#ex12c", {
+      id: "slider12c",
+      min: 0,
+      max: 24,
+      range: true,
+      step: 0.5,
+      tooltip: 'always',
+      tooltip_split: true,
+      value: [6, 17]
+    });
 
-      function openBox() {
-	      document.querySelector(".about_title").innerHTML = "Lukk";
-        document.querySelector(".about_side p").setAttribute('onclick','closeNav()')
-        document.querySelector('.logo_full').style.backgroundImage = '300px';
-        document.querySelector(".top_menu_left").classList.add("removeIt");
+    sliderC.on("slide", function (sliderValue) {
+
+      // Make it to minutes, multiply by 60! 5*60/10??
+      var decimalPart = sliderValue[0] - Math.floor(sliderValue[0]);
+      var onlyTwoDecimalPlaces = decimalPart.toFixed(2);
+      var minutes = onlyTwoDecimalPlaces * 600 / 10;
+
+      console.log(minutes);
+      // Calculate Income, runs when slider is slided.
+
+      var startTime = sliderValue[0];
+      var endTime = sliderValue[1];
+      var workHours = endTime - startTime;
+      var basicIncome = workHours * 100; // Change 100 to input value.
+
+      // basicIncome += overtime; Calculate overtime
+      if (sliderValue[0] <= 9.5) {
+        document.querySelector(".showStartTime h2").innerHTML = "0" + sliderValue[0];
+      } else {
+        document.querySelector(".showStartTime h2").innerHTML = sliderValue[0];
+      }
+      if (sliderValue[1] <= 9.5) {
+        document.querySelector(".showEndTime h2").innerHTML = "0" + sliderValue[1];
+      } else {
+        document.querySelector(".showEndTime h2").innerHTML = sliderValue[1];
       }
 
-      function closeBox() {
-        document.querySelector(".about_title").innerHTML = "Om Meg";
-        document.querySelector(".about_side p").setAttribute('onclick','openNav()')
-        document.querySelector('.logo_full').style.height = '90px';
-        document.querySelector(".top_menu_left").classList.remove("removeIt");
-      }
-      
-    </script>
-  </body>
+    });
+
+    function openBox() { // Skjer det motsatte, navn må byttes.
+      document.querySelector(".preintrobox p").innerHTML = "Endre";
+      document.querySelector(".preintrobox").style.height = '45px';
+      document.querySelector(".preintrobox").style.color = 'grey';
+      document.querySelector(".preintrobox").classList.add("smoothSlide");
+      document.querySelector(".preintrobox p").setAttribute('onclick', 'closeBox()');
+      document.querySelector(".prebox1").classList.add("showBox");
+      document.querySelector(".prebox1").classList.remove("hideBox");
+      document.querySelector(".prebox2").classList.add("showBox");
+      document.querySelector(".prebox2").classList.remove("hideBox");
+      document.querySelector(".prebox3").classList.add("showBox");
+      document.querySelector(".prebox3").classList.remove("hideBox");
+    }
+
+    function closeBox() {
+      document.querySelector(".preintrobox p").innerHTML = "Lukk";
+      document.querySelector(".preintrobox").style.height = '200px';
+      document.querySelector(".preintrobox").classList.add("smoothSlide");
+      document.querySelector(".preintrobox p").setAttribute('onclick', 'openBox()');
+      document.querySelector(".prebox1").classList.add("hideBox");
+      document.querySelector(".prebox1").classList.remove("showBox");
+      document.querySelector(".prebox2").classList.add("hideBox");
+      document.querySelector(".prebox2").classList.remove("showBox");
+      document.querySelector(".prebox3").classList.add("hideBox");
+      document.querySelector(".prebox3").classList.remove("showBox");
+    }
+  </script>
+</body>
+
 </html>

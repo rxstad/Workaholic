@@ -11,9 +11,13 @@
 <div class="draggable"></div>
 
 <body style="-webkit-app-region: no-drag">
+  <center><img src="app_icons/Logo.png" width="50"></center><br>
   <div class="main">
     <div class="prebox_cont">
       <div class="preintrobox">
+        <div class="hideOnNeste">
+          <input class="basicIncome" type="text" placeholder="Hva er din timelønn?" oninput="sliderValue()" />
+        </div>
         <p onclick='openBox()'>Neste</p>
       </div>
       <div class="prebox3">
@@ -31,6 +35,10 @@
           <h2>17</h2>
         </div>
       </div>
+      <div class="prebox4result">
+          Du tjener<p></p> i dag.
+        </div>
+
     </div>
   </div>
 
@@ -61,12 +69,13 @@
 
       console.log(minutes);
       // Calculate Income, runs when slider is slided.
+      var income      = document.querySelector(".basicIncome").value;
+      var startTime   = sliderValue[0];
+      var endTime     = sliderValue[1];
+      var workHours   = endTime - startTime;
+      var basicIncome = workHours * income;
 
-      var startTime = sliderValue[0];
-      var endTime = sliderValue[1];
-      var workHours = endTime - startTime;
-      var basicIncome = workHours * 100; // Change 100 to input value.
-
+      document.querySelector(".prebox4result p").innerHTML = basicIncome;
       // basicIncome += overtime; Calculate overtime
       if (sliderValue[0] <= 9.5) {
         document.querySelector(".showStartTime h2").innerHTML = "0" + sliderValue[0];
@@ -74,10 +83,12 @@
         document.querySelector(".showStartTime h2").innerHTML = sliderValue[0];
       }
       if (sliderValue[1] <= 9.5) {
-        document.querySelector(".showEndTime h2").innerHTML = "0" + sliderValue[1];
+        document.querySelector(".showEndTime h2").innerHTML   = "0" + sliderValue[1];
       } else {
-        document.querySelector(".showEndTime h2").innerHTML = sliderValue[1];
+        document.querySelector(".showEndTime h2").innerHTML   = sliderValue[1];
       }
+
+
 
     });
 
@@ -93,6 +104,8 @@
       document.querySelector(".prebox2").classList.remove("hideBox");
       document.querySelector(".prebox3").classList.add("showBox");
       document.querySelector(".prebox3").classList.remove("hideBox");
+      document.querySelector(".hideOnNeste").classList.add("hideBox");
+      document.querySelector(".hideOnNeste").classList.remove("showBox");
     }
 
     function closeBox() {
@@ -106,6 +119,9 @@
       document.querySelector(".prebox2").classList.remove("showBox");
       document.querySelector(".prebox3").classList.add("hideBox");
       document.querySelector(".prebox3").classList.remove("showBox");
+      document.querySelector(".hideOnNeste").classList.remove("hideBox");
+      document.querySelector(".hideOnNeste").classList.add("showBox");
+    
     }
   </script>
 </body>

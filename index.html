@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Hello World!</title>
+    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./node_modules/bootstrap-slider/dist/css/bootstrap-slider.min.css">
+  </head>
+  <body>
+
+    <input id="ex12c" type="text"/><br/>
+
+    <script>
+      // You can also require other files to run in this process
+      require('./renderer.js')
+      
+      var Slider = require("bootstrap-slider");
+
+      var sliderC = new Slider("#ex12c", { 
+        id: "slider12c", 
+        min: 0, 
+        max: 10, 
+        range: true, 
+        value: [3, 7] 
+      });
+      
+      sliderC.on("slide", function(sliderValue) {
+        //din kode
+      });
+
+    </script>
+  </body>
+</html>

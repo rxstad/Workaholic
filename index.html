@@ -11,14 +11,17 @@
 <div class="draggable"></div>
 
 <body style="-webkit-app-region: no-drag">
-  <center><img src="app_icons/Logo.png" width="50"></center><br>
+  <center>
+    <img src="app_icons/Logo.png" width="50">
+  </center>
+  <br>
   <div class="main">
     <div class="prebox_cont">
       <div class="preintrobox">
         <div class="hideOnNeste">
           <input class="basicIncome" type="text" placeholder="Hva er din timelønn?" oninput="sliderValue()" />
         </div>
-        <p onclick='openBox()'>Neste</p>
+        <p class="nextButton" onclick='openBox()'>Neste</p>
       </div>
       <div class="prebox3">
         <input id="ex12c" type="text" />
@@ -26,18 +29,19 @@
       <div class="prebox1">
         <div class="showStartTime">
           Start
-          <h2>06</h2>
+          <h2>06.00</h2>
         </div>
       </div>
       <div class="prebox2">
         <div class="showEndTime">
           Slutt
-          <h2>17</h2>
+          <h2>17.00</h2>
         </div>
       </div>
       <div class="prebox4result">
-          Du tjener<p></p> i dag.
-        </div>
+        Du tjener
+        <p>0</p> i dag.
+      </div>
 
     </div>
   </div>
@@ -62,32 +66,40 @@
 
     sliderC.on("slide", function (sliderValue) {
 
-      // Make it to minutes, multiply by 60! 5*60/10??
-      var decimalPart = sliderValue[0] - Math.floor(sliderValue[0]);
-      var onlyTwoDecimalPlaces = decimalPart.toFixed(2);
-      var minutes = onlyTwoDecimalPlaces * 600 / 10;
-
-      console.log(minutes);
       // Calculate Income, runs when slider is slided.
-      var income      = document.querySelector(".basicIncome").value;
-      var startTime   = sliderValue[0];
-      var endTime     = sliderValue[1];
-      var workHours   = endTime - startTime;
+      var income = document.querySelector(".basicIncome").value;
+      var startTime = sliderValue[0];
+      var endTime = sliderValue[1];
+      var workHours = endTime - startTime;
       var basicIncome = workHours * income;
 
       document.querySelector(".prebox4result p").innerHTML = basicIncome;
-      // basicIncome += overtime; Calculate overtime
-      if (sliderValue[0] <= 9.5) {
-        document.querySelector(".showStartTime h2").innerHTML = "0" + sliderValue[0];
-      } else {
-        document.querySelector(".showStartTime h2").innerHTML = sliderValue[0];
-      }
-      if (sliderValue[1] <= 9.5) {
-        document.querySelector(".showEndTime h2").innerHTML   = "0" + sliderValue[1];
-      } else {
-        document.querySelector(".showEndTime h2").innerHTML   = sliderValue[1];
-      }
 
+
+      // Normalize slider values      
+      function normalize(value) {
+        
+        var output;
+
+        // remove decimal from value
+        var valInt = Math.floor(value);
+
+        // get decimal
+        var decimalValue = value - valInt;
+        
+        // prefix with 0
+        if(valInt < 10) output = "0"+ valInt;
+        else output = valInt;
+        
+        // add minutes
+        if(decimalValue == .5) output +=".30";
+        else output +=".00"
+        
+        return output;
+      }
+      
+      document.querySelector(".showStartTime h2").innerHTML = normalize(sliderValue[0]);
+      document.querySelector(".showEndTime h2").innerHTML = normalize(sliderValue[1]);
 
 
     });
@@ -95,6 +107,8 @@
     function openBox() { // Skjer det motsatte, navn må byttes.
       document.querySelector(".preintrobox p").innerHTML = "Endre";
       document.querySelector(".preintrobox").style.height = '45px';
+      document.querySelector(".nextButton").style.height = '45px';
+      document.querySelector(".nextButton").classList.add("smoothSlide");
       document.querySelector(".preintrobox").style.color = 'grey';
       document.querySelector(".preintrobox").classList.add("smoothSlide");
       document.querySelector(".preintrobox p").setAttribute('onclick', 'closeBox()');
@@ -106,12 +120,16 @@
       document.querySelector(".prebox3").classList.remove("hideBox");
       document.querySelector(".hideOnNeste").classList.add("hideBox");
       document.querySelector(".hideOnNeste").classList.remove("showBox");
+      document.querySelector(".prebox4result").classList.remove("hideBox");
+      document.querySelector(".prebox4result").classList.add("showBox");
     }
 
     function closeBox() {
       document.querySelector(".preintrobox p").innerHTML = "Lukk";
       document.querySelector(".preintrobox").style.height = '200px';
       document.querySelector(".preintrobox").classList.add("smoothSlide");
+      document.querySelector(".nextButton").style.height = '200px';
+      document.querySelector(".nextButton").classList.add("smoothSlide");
       document.querySelector(".preintrobox p").setAttribute('onclick', 'openBox()');
       document.querySelector(".prebox1").classList.add("hideBox");
       document.querySelector(".prebox1").classList.remove("showBox");
@@ -121,7 +139,9 @@
       document.querySelector(".prebox3").classList.remove("showBox");
       document.querySelector(".hideOnNeste").classList.remove("hideBox");
       document.querySelector(".hideOnNeste").classList.add("showBox");
-    
+      document.querySelector(".prebox4result").classList.add("hideBox");
+      document.querySelector(".prebox4result").classList.remove("showBox");
+
     }
   </script>
 </body>

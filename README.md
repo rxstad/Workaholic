@@ -6,4 +6,4 @@ This readme is a work in progress.
 
 ## License
 
-[GNU GENERAL PUBLIC LICENSE](LICENSE.md)
+[GNU General Public License v3.0](LICENSE.md)

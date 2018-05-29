@@ -12,16 +12,18 @@
 
 <body style="-webkit-app-region: no-drag">
   <center>
-    <img src="app_icons/Logo.png" width="50">
+    <img src="app_icons/Logo.png" width="50" style="cursor: help;">
   </center>
   <br>
   <div class="main">
     <div class="prebox_cont">
       <div class="preintrobox">
+          <p class="nextButton" onclick='openBox()'>Neste</p>
         <div class="hideOnNeste">
           <input class="basicIncome" type="text" placeholder="Hva er din timelønn?" oninput="sliderValue()" />
+          <!-- TODO: Run function on input-->
+          <!-- TODO: When opacity = 0, add display:none to element, and add block when opacity is 0.1 or above-->
         </div>
-        <p class="nextButton" onclick='openBox()'>Neste</p>
       </div>
       <div class="prebox3">
         <input id="ex12c" type="text" />
@@ -48,7 +50,6 @@
 
 
   <script>
-    // You can also require other files to run in this process
     require('./renderer.js')
 
     var Slider = require("bootstrap-slider");
@@ -105,7 +106,7 @@
     });
     // TODO: Legge inn funksjon som gjør at brukeren må skrive inn value i input for å gå videre.
 
-    function openBox() { // Skjer det motsatte, navn må byttes.
+    function openBox() { // TODO: Skjer det motsatte, navn må byttes.
       document.querySelector(".preintrobox p").innerHTML = "Endre";
       document.querySelector(".preintrobox").style.height = '45px';
       document.querySelector(".nextButton").style.height = '45px';

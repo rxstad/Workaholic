@@ -18,11 +18,12 @@
   <div class="main">
     <div class="prebox_cont">
       <div class="preintrobox">
-          <p class="nextButton" onclick='openBox()'>Neste</p>
+        <p class="nextButton" onclick='openBox()'>Neste</p>
         <div class="hideOnNeste">
-          <input class="basicIncome" type="text" placeholder="Hva er din timelønn?" oninput="sliderValue()" />
+          <input class="basicIncome" type="text" placeholder="Din timelønn?" oninput='sliderValue()' /> kr
           <!-- TODO: Run function on input-->
-          <!-- TODO: When opacity = 0, add display:none to element, and add block when opacity is 0.1 or above-->
+          <!-- TODO: When opacity = 0, add display:none to element, and add block when opacity is 0.01 or above-->
+          <br><br>Hello how does this work against this?
         </div>
       </div>
       <div class="prebox3">
@@ -41,8 +42,15 @@
         </div>
       </div>
       <div class="prebox4result">
-        Du tjener
-        <p>0</p> i dag.
+
+        <div class="pb4Col1">
+          Du Tjener
+        </div>
+
+        <div class="pb4Col2">
+          <h2>0</h2>kr
+        </div>
+
       </div>
 
     </div>
@@ -74,12 +82,12 @@
       var workHours = endTime - startTime;
       var basicIncome = workHours * income;
 
-      document.querySelector(".prebox4result p").innerHTML = basicIncome;
-
+      document.querySelector(".prebox4result h2").innerHTML = basicIncome;
+      // FIXME: Slice ned alle desimaltallene hvis man har timelønn med desimal.
 
       // Normalize slider values      
       function normalize(value) {
-        
+
         var output;
 
         // remove decimal from value
@@ -87,18 +95,18 @@
 
         // get decimal
         var decimalValue = value - valInt;
-        
+
         // prefix with 0
-        if(valInt < 10) output = "0"+ valInt;
+        if (valInt < 10) output = "0" + valInt;
         else output = valInt;
-        
+
         // add minutes
-        if(decimalValue == .5) output +=".30";
-        else output +=".00"
-        
+        if (decimalValue == .5) output += ".30";
+        else output += ".00"
+
         return output;
       }
-      
+
       document.querySelector(".showStartTime h2").innerHTML = normalize(sliderValue[0]);
       document.querySelector(".showEndTime h2").innerHTML = normalize(sliderValue[1]);
 
@@ -106,13 +114,14 @@
     });
     // TODO: Legge inn funksjon som gjør at brukeren må skrive inn value i input for å gå videre.
 
-    function openBox() { // TODO: Skjer det motsatte, navn må byttes.
+    function openBox() { // FIXME: Skjer det motsatte, navn må byttes.
       document.querySelector(".preintrobox p").innerHTML = "Endre";
       document.querySelector(".preintrobox").style.height = '45px';
       document.querySelector(".nextButton").style.height = '45px';
       document.querySelector(".nextButton").classList.add("smoothSlide");
       document.querySelector(".preintrobox").style.color = 'grey';
       document.querySelector(".preintrobox").classList.add("smoothSlide");
+      document.querySelector(".preintrobox p").style.lineHeight = '25px';
       document.querySelector(".preintrobox p").setAttribute('onclick', 'closeBox()');
       document.querySelector(".prebox1").classList.add("showBox");
       document.querySelector(".prebox1").classList.remove("hideBox");
@@ -126,12 +135,13 @@
       document.querySelector(".prebox4result").classList.add("showBox");
     }
 
-    function closeBox() {
+    function closeBox() { // FIXME: Endre navn
       document.querySelector(".preintrobox p").innerHTML = "Lukk";
       document.querySelector(".preintrobox").style.height = '200px';
       document.querySelector(".preintrobox").classList.add("smoothSlide");
       document.querySelector(".nextButton").style.height = '200px';
       document.querySelector(".nextButton").classList.add("smoothSlide");
+      document.querySelector(".preintrobox p").style.lineHeight = '180px';
       document.querySelector(".preintrobox p").setAttribute('onclick', 'openBox()');
       document.querySelector(".prebox1").classList.add("hideBox");
       document.querySelector(".prebox1").classList.remove("showBox");

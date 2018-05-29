@@ -41,7 +41,7 @@ body {
   padding: 10px;
   margin: 10px;
   margin-bottom: 30px;
-  text-align: center;
+  text-align: left;
   overflow: hidden;
   position: relative;
 }
@@ -52,6 +52,8 @@ body {
   margin-left: auto;
   margin-right: auto;
   padding-top: 10px;
+  line-height: 180px;
+  text-align: center;
 }
 .preintrobox p:hover {
   color: #fff;
@@ -93,6 +95,18 @@ body {
   margin: 0px;
   transition: 0.2s;
 }
+.showStartTime {
+  color: grey;
+}
+.showStartTime h2 {
+  color: #fff;
+}
+.showEndTime {
+  color: grey;
+}
+.showEndTime h2 {
+  color: #fff;
+}
 .prebox4result {
   color: #fff;
   flex-grow: 2;
@@ -106,18 +120,35 @@ body {
   margin: 10px;
   transition: 0.2s;
   text-align: center;
+  display: flex;
 }
-.showStartTime {
+.pb4Col1 {
+  flex-grow: 1;
+  background: #282828;
+  padding: 10px;
+  margin-top: -10px;
+  margin-left: -10px;
+  height: 110px;
+  min-width: 90px;
+  max-width: 150px;
+  line-height: 90px;
   color: grey;
+  font-size: 12pt;
 }
-.showStartTime h2 {
-  color: #fff;
+.pb4Col2 {
+  flex-grow: 2;
+  padding: 10px;
+  min-width: 90px;
+  height: 110px;
+  white-space: nowrap;
 }
-.showEndTime {
-  color: grey;
-}
-.showEndTime h2 {
-  color: #fff;
+.pb4Col3 {
+  flex-grow: 1;
+  background: #282828;
+  padding: 10px;
+  margin-top: -10px;
+  margin-right: -10px;
+  height: 110px;
 }
 .nextButton {
   z-index: 9999;
@@ -126,7 +157,7 @@ body {
   position: absolute;
   background: #282828;
   margin-top: -10px;
-  left: 0px;
+  right: 0px;
 }
 .startTime {
   color: #fff;
@@ -155,6 +186,7 @@ body {
   border-bottom: 2px solid #fff;
   margin-bottom: 20px;
   margin-left: 30px;
+  width: 110px;
   z-index: -9999;
   transition: 0.6s all ease;
 }

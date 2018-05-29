@@ -1,6 +1,7 @@
 # Workaholic
 
-**A simple electron app to organize your work schedule and salary.**
+**A simple electron app to organize and simplify your work schedule and salary.** 👨🏼‍💻
+
 This readme is a work in progress.
 
 ## License

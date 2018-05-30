@@ -3,6 +3,7 @@ html, body {
     height: 100%;
     margin: 0;
     font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+    box-sizing: border-box;
 }
 .header {
     width: 100%;
@@ -10,6 +11,7 @@ html, body {
     position: relative;
     background: url("img/headerBackground.jpg") no-repeat;
     background-size: cover;
+    overflow: hidden;
 }
 .headerInner {
     max-width: 800px;
@@ -57,9 +59,45 @@ html, body {
     letter-spacing: 0.2px;
 }
 
-.hideOnNeste p {
-    z-index: 999999999;
-  }
+.menu {
+    width: 600px;
+    height: 90px;
+    margin: 0 auto;
+    margin-top: -40px;
+    padding: 10px;
+    position: relative;
+    background: #fff;
+    box-sizing: border-box;
+    -webkit-box-shadow: 0px 0px 42px 11px rgba(0,0,0,0.15);
+    -moz-box-shadow: 0px 0px 42px 11px rgba(0,0,0,0.15);
+    box-shadow: 0px 0px 42px 11px rgba(0,0,0,0.15);
+}
+.menu p {
+    word-spacing: 70px;
+    margin-left: 40px;
+    line-height: 33px;
+    font-weight: 400;
+    cursor: pointer;
+}
+.menu .downloadButton {
+    position: absolute;
+    background: #002540;
+    margin-top: -52px;
+    right: 40px;
+    width: 125px;
+    height: 40px;
+    border-radius: 5px;
+    text-align: center;
+    line-height: 38px;
+    transition: 0.6s;
+    color: #fff;
+    cursor: pointer;
+    font-weight: 400;
+}
+.menu .downloadButton:hover {
+    background: #98233A;
+    cursor: pointer;
+}
   
   /* Fade in on body load*/
   @keyframes fadein {

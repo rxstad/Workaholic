@@ -10,6 +10,7 @@ body {
   -webkit-animation: fadein 2s; /* Safari, Chrome and Opera > 12.1 */
      -moz-animation: fadein 2s; /* Firefox < 16 */
           animation: fadein 2s;
+  user-select: none;
 }
 /* Top bar that is draggable */
 .draggable {
